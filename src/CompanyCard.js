@@ -1,20 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "./logo.png";
+import "./CompanyCard.css";
 
-function CompanyCard({ company }) {
+const CompanyCard = ({ company }) => {
   console.debug("CompanyCard...", "company=", company);
 
   return (
-    <a href={`/companies/${company.handle}`}>
-      <div style={{ outline: "aqua 2px solid" }}>
-        <h6>
-          <span>{company.name}</span>
+    <Link className="CompanyCard card mb-4" to={`/companies/${company.handle}`}>
+      <div className="card-body">
+        <h6 className="card-title d-flex justify-content-between">
+          <span className="text-capitalize">{company.name}</span>
           <img src={company.logo_url || logo} alt={`${company.name} Logo`} />
         </h6>
-        <p>{company.description}</p>
+        <p className="card-text">{company.description}</p>
       </div>
-    </a>
+    </Link>
   );
-}
+};
 
 export default CompanyCard;

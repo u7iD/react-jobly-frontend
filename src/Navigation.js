@@ -1,27 +1,60 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import CurrentUserContext from "./CurrentUserContext";
+import "./Navigation.css";
 
-function Navigation({ logout }) {
-  const currentUser = useContext(CurrentUserContext);
-  const loggedInLinks = (
-    <>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
-      <NavLink to="/profile">Profile</NavLink>
-      <NavLink to="/">
-        <span onClick={logout}>Log out</span>
+const Navigation = ({ logout }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+  console.debug("Navigation...", "currentUser=", currentUser);
+
+  // Using a function to set the links when a user is logged
+  // is better than using a const. Using const creates a bug
+  // "Uncaught TypeError: Cannot read property 'first_name' of null"
+  const loggedInLinks = () => {
+    return (
+      <ul className="nav">
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/companies">
+            Companies
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/jobs">
+            Jobs
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/profile">
+            Profile
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/login">
+            <span onClick={logout}>
+              Log out {currentUser.first_name || currentUser.username}
+            </span>
+          </NavLink>
+        </li>
+      </ul>
+    );
+  };
+
+  const loggedOutLinks = () => {
+    return (
+      <NavLink className="nav-link" to="/login">
+        Login
       </NavLink>
-    </>
-  );
+    );
+  };
 
-  const loggedOutLinks = <NavLink to="/login">Login</NavLink>;
   return (
-    <nav>
-      <NavLink to="/">Jobly</NavLink>
-      {currentUser ? loggedInLinks : loggedOutLinks}
+    <nav className="navbar bg-white mb-4">
+      <NavLink className="nav-link" exact to="/">
+        Jobly
+      </NavLink>
+      {currentUser ? loggedInLinks() : loggedOutLinks()}
     </nav>
   );
-}
+};
 
 export default Navigation;

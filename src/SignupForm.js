@@ -17,7 +17,7 @@ const SignupForm = ({ signup }) => {
     event.preventDefault();
 
     const response = await signup(formData);
-    console.log("response", response);
+
     if (response.success) {
       history.push("/jobs");
     } else {
@@ -33,68 +33,72 @@ const SignupForm = ({ signup }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Username
-            <input
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            First name
-            <input
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Last name
-            <input
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Email
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+    <form className="bg-white" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label className="font-weight-bold">Username*</label>
+        <input
+          name="username"
+          className="form-control"
+          value={formData.username}
+          onChange={handleChange}
+        />
+        <small className="form-text text-muted">
+          between 1 and 55 characters
+        </small>
+      </div>
+      <div className="form-group">
+        <label className="font-weight-bold">Password*</label>
+        <input
+          name="password"
+          className="form-control"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <small className="form-text text-muted">
+          between 5 and 55 characters
+        </small>
+      </div>
+      <div className="form-group">
+        <label className="font-weight-bold">First name*</label>
+        <input
+          name="first_name"
+          className="form-control"
+          value={formData.first_name}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label className="font-weight-bold">Last name*</label>
+        <input
+          name="last_name"
+          className="form-control"
+          value={formData.last_name}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label className="font-weight-bold">Email*</label>
+        <input
+          name="email"
+          className="form-control"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
 
-        <div>
-          {formErrors.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+      {formErrors.length > 0
+        ? formErrors.map((error) => (
+            <div className="alert alert-danger small" key={error}>
+              {error}
+            </div>
+          ))
+        : null}
+
+      <button type="submit" className="btn btn-primary float-right">
+        Submit
+      </button>
+    </form>
   );
 };
 

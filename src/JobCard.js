@@ -3,22 +3,36 @@ import JoblyApi from "./JoblyAPI";
 
 function JobCard({ id, title, salary, equity, appliedStatus }) {
   const [applied, setApplied] = useState(appliedStatus);
-  const handleClick = async () => {
+  const handleClick = async (event) => {
     if (!applied) {
-      await JoblyApi.applyForJob(id);
-      setApplied(true);
+      // await applyForJob(id);
+      const message = await JoblyApi.applyForJob(id);
+      setApplied(Boolean(message));
     }
   };
   return (
-    <div>
-      <h6>
-        <span>{title}</span>
-      </h6>
-      <div>Salary: {salary}</div>
-      <div>Equity: {equity}</div>
-      <button onClick={handleClick} disabled={applied}>
-        {applied ? "APPLIED" : "APPLY"}
-      </button>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h6 className="card-title text-capitalize">{title}</h6>
+        <div className="card-text">Salary: ${salary}</div>
+        {/* use toPrecision to avoid floating point number such as 14.000000000000002% */}
+        <div className="card-text">
+          Equity:{" "}
+          {equity * 100 > 10
+            ? (equity * 100).toPrecision(2)
+            : (equity * 100).toPrecision(1)}
+          %
+        </div>
+        <div className="text-right">
+          <button
+            className="btn btn-large btn-danger font-weight-bold"
+            onClick={handleClick}
+            disabled={applied}
+          >
+            {applied ? "APPLIED" : "APPLY"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

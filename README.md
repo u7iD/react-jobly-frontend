@@ -1,6 +1,14 @@
 # Jobly application in React
 
-This project is
+This project lets a user to
+-- log into or sign up for an account
+-- see lists of companies and jobs offered by these companies
+-- see the detail of a company
+-- search lists of companies and jobs using keyword(s)
+-- apply for a job on the list of jobs for all companies or a specific company
+-- modify some user account information
+
+It's for learning React hooks (useState, useEffect and custom hook useLocalStorage)
 
 ## Component hierarchy
 
@@ -78,9 +86,3 @@ state: formData / {username, password}
 - /companies/anderson-arias-and-morrow
 - /profile
 - /login
-
-## Todo
-
-Custom json schema error message; example of current error "
-instance.first_name does not meet minimum length of 1"
-Remove NotFound.js

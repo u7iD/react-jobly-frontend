@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import CurrentUserContext from "./CurrentUserContext";
 
-function PrivateRoute({ exact, path, children }) {
+const PrivateRoute = ({ exact, path, children }) => {
   console.debug(
     "PrivateRoute...",
     "exact=",
@@ -12,15 +12,8 @@ function PrivateRoute({ exact, path, children }) {
     "children=",
     children
   );
-  // return currentUser ? (
-  //   <Route exact={exact} path={path}>
-  //     {children}
-  //   </Route>
-  // ) : (
-  //   <Redirect to="/notfound"></Redirect>
-  // );
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   if (!currentUser) {
     return <Redirect to="/login"></Redirect>;
@@ -31,6 +24,6 @@ function PrivateRoute({ exact, path, children }) {
       {children}
     </Route>
   );
-}
+};
 
 export default PrivateRoute;

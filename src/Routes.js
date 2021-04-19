@@ -7,9 +7,8 @@ import LoginPage from "./LoginPage";
 import ProfileForm from "./ProfileForm";
 import Homepage from "./Homepage";
 import PrivateRoute from "./PrivateRoute";
-import NotFound from "./NotFound";
 
-const Routes = ({ login, signup }) => {
+const Routes = ({ login, signup, setCurrentUser }) => {
   console.debug(
     "Routes...",
     `login=${typeof login}`,
@@ -22,9 +21,6 @@ const Routes = ({ login, signup }) => {
       </Route>
       <Route exact path="/">
         <Homepage />
-      </Route>
-      <Route exact path="/notfound">
-        <NotFound />
       </Route>
       <PrivateRoute exact path="/companies/:handle">
         <CompanyDetail />

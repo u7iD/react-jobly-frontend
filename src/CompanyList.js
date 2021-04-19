@@ -8,6 +8,9 @@ function CompanyList() {
   const [companies, setCompanies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const onSearchTermChange = (str) => setSearchTerm(str);
+  const filteredCompanies = companies.filter((company) =>
+    company.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   console.debug(
     "CompanyList...",
@@ -30,13 +33,15 @@ function CompanyList() {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="col-md-8 offset-md-2">
       <SearchForm onSearchTermChange={onSearchTermChange} />
-      <div>
-        {companies.map((company) => (
+      {filteredCompanies.length > 0 ? (
+        filteredCompanies.map((company) => (
           <CompanyCard company={company} key={company.handle} />
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>Sorry no records found</p>
+      )}
     </div>
   );
 }

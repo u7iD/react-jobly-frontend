@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import JobCard from "./JobCard";
-import CurrentUserContext from "./CurrentUserContext";
+import LoadingSpinner from "./LoadingSpinner";
 
-function JobCardList({ jobs }) {
-  const currentUser = useContext(CurrentUserContext);
-
-  const appliedJobIds = currentUser.jobs.map((job) => job.id);
+function JobCardList({ jobs, applyForJob }) {
   console.debug(
     "JobCardList...",
     "jobs=",
     jobs,
-    "currentUser=",
-    currentUser,
-    "appliedJobIds=",
-    appliedJobIds
+    "typeof applyForJob= ",
+    typeof applyForJob
   );
+
+  if (!jobs) return <LoadingSpinner />;
 
   return (
     <div>
@@ -24,7 +21,8 @@ function JobCardList({ jobs }) {
           title={job.title}
           salary={job.salary}
           equity={job.equity}
-          appliedStatus={appliedJobIds.indexOf(job.id) > -1 ? true : false}
+          appliedStatus={job.state}
+          applyForJob={applyForJob}
           key={job.id}
         />
       ))}

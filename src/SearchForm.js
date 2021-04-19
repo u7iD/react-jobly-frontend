@@ -13,17 +13,24 @@ function SearchForm({ onSearchTermChange }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="search"
-          placeholder="Enter search term..."
-          value={searchStr}
-          onChange={handleChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <form className="form-inline mb-4 mt-4" onSubmit={handleSubmit}>
+      <input
+        className="form-control form-control-lg flex-grow-1"
+        type="search"
+        placeholder="Enter search term..."
+        value={searchStr}
+        onChange={handleChange}
+        data-test="search-input"
+      />
+
+      <button
+        className="btn btn-lg btn-primary"
+        type="submit"
+        data-test="submit"
+      >
+        Submit
+      </button>
+    </form>
   );
 }
 

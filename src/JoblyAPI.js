@@ -6,11 +6,6 @@ class JoblyApi {
 
     const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
-    // const _token = // for now, hardcode token for "testing"
-    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
-    //   "3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2MTM4ODcwNDN9." +
-    //   "Rgro9FPB3saWxR1Q9x2iWGtEZXMGQn1fAGow3NnCymw";
-
     const _token = localStorage.getItem("jobly-token");
 
     const data =
@@ -41,9 +36,14 @@ class JoblyApi {
     return res.companies;
   }
 
-  static async getJobs(searchTerm) {
+  static async getJobs(searchTerm = "") {
     let res = await this.request(`jobs?search=${searchTerm}`);
     return res.jobs;
+  }
+
+  static async applyForJob(jobId) {
+    let res = await this.request(`jobs/${jobId}/apply`, {}, "post");
+    return res.message;
   }
 
   static async login(data) {
@@ -61,9 +61,9 @@ class JoblyApi {
     return res.user;
   }
 
-  static async applyForJob(jobId) {
-    let res = await this.request(`jobs/${jobId}/apply`, {}, "post");
-    return res.message;
+  static async updateUser(username, data) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
 }
 

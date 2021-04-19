@@ -1,42 +1,39 @@
-import { React, useState, useEffect, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CurrentUserContext from "./CurrentUserContext";
 import JobCardList from "./JobCardList";
 import JoblyApi from "./JoblyAPI";
+import LoadSpinner from "./LoadingSpinner";
 
-function CompanyDetail() {
+const CompanyDetail = () => {
   const [company, setCompany] = useState({});
   const { handle } = useParams();
-  const currentUser = useContext(CurrentUserContext);
 
-  console.debug(
-    "CompanyDetail...",
-    "company=",
-    company,
-    "handle=",
-    handle,
-    "currentUser=",
-    currentUser
-  );
+  console.debug("CompanyDetail...", "company=", company, "handle=", handle);
 
+  // important to get applied jobs from API call
+  // not from the currentUser object;
+  // otherwise if a user applies for a job
+  // from the /jobs URL, the company detail page
+  // will still show the job as not applied
   useEffect(() => {
-    async function getCompanyData() {
+    const getCompanyDataAndJobsForUser = async () => {
       const companyData = await JoblyApi.getCompany(handle);
       setCompany(companyData);
-    }
-    getCompanyData();
+    };
+    getCompanyDataAndJobsForUser();
   }, [handle]);
 
+  // company is an empty object and company.jobs is undefined
+  // before useEffect runs; show LoadSpinner before we get the
+  // company object
+  if (!company) return <LoadSpinner />;
   return (
-    <div>
-      <h5>{company.title}</h5>
+    <div className="col-md-8 offset-md-2">
+      <h4 className="text-capitalize">{company.name}</h4>
       <p>{company.description}</p>
-      {/* Check company.jobs is not undefined; otherwise we pass undefined 
-          to the jobs prop to JobCardList and causes an error; company is an empty
-          object before useEffect runs */}
-      {company.jobs && <JobCardList jobs={company.jobs} />}
+      <JobCardList jobs={company.jobs} />
     </div>
   );
-}
+};
 
 export default CompanyDetail;
