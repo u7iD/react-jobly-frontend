@@ -70,15 +70,13 @@ const App = () => {
   if (token && !infoLoaded) return <LoadingSpinner />;
 
   return (
-    <div>
-      <div className="App">
-        <BrowserRouter>
-          <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-            <Navigation logout={logout} />
-            <Routes login={login} signup={signup} />
-          </CurrentUserContext.Provider>
-        </BrowserRouter>
-      </div>
+    <div className="App">
+      <BrowserRouter>
+        <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+          <Navigation logout={logout} />
+          <Routes login={login} signup={signup} />
+        </CurrentUserContext.Provider>
+      </BrowserRouter>
     </div>
   );
 };

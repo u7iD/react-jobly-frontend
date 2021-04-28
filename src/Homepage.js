@@ -8,12 +8,17 @@ const Homepage = () => {
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1>Jobly</h1>
-      <p>All the jobs in one, convenient place.</p>
+      <h1 className="mb-4 font-weight-bold">Jobly</h1>
+      <p className="lead">All the jobs in one, convenient place.</p>
       {currentUser ? (
-        <h2>Welcome Back {currentUser.first_name}!</h2>
+        <h2>Welcome Back {currentUser.first_name || currentUser.username}!</h2>
       ) : (
-        <button onClick={() => history.push("/login")}>Log in</button>
+        <button
+          className="btn btn-primary font-weight-bold"
+          onClick={() => history.push("/login")}
+        >
+          Log in
+        </button>
       )}
     </div>
   );
