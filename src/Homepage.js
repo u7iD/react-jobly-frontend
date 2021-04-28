@@ -7,8 +7,8 @@ const Homepage = () => {
   const { currentUser } = useContext(CurrentUserContext);
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <h1 className="mb-4 font-weight-bold">Jobly</h1>
+    <div className="text-center mb-4">
+      <h1 className="font-weight-bold">Jobly</h1>
       <p className="lead">All the jobs in one, convenient place.</p>
       {currentUser ? (
         <h2>Welcome Back {currentUser.first_name || currentUser.username}!</h2>
