@@ -70,7 +70,7 @@ const App = () => {
   if (token && !infoLoaded) return <LoadingSpinner />;
 
   return (
-    <div className="App">
+    <div className="App h-100">
       <BrowserRouter>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <Navigation logout={logout} />
