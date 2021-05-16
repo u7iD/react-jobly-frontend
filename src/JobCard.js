@@ -15,7 +15,7 @@ function JobCard({ id, title, salary, equity, appliedStatus }) {
       <div className="card-body">
         <h6 className="card-title text-capitalize">{title}</h6>
         <div className="card-text">
-          Salary: $
+          Salary:{" "}
           {salary.toLocaleString("en-US", {
             style: "currency",
             currency: "USD",
