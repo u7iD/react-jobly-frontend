@@ -14,7 +14,14 @@ function JobCard({ id, title, salary, equity, appliedStatus }) {
     <div className="card mb-4">
       <div className="card-body">
         <h6 className="card-title text-capitalize">{title}</h6>
-        <div className="card-text">Salary: ${salary}</div>
+        <div className="card-text">
+          Salary: $
+          {salary.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0,
+          })}
+        </div>
         {/* use toPrecision to avoid floating point number such as 14.000000000000002% */}
         <div className="card-text">
           Equity:{" "}
