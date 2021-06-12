@@ -8,7 +8,7 @@ import ProfileForm from "./ProfileForm";
 import Homepage from "./Homepage";
 import PrivateRoute from "./PrivateRoute";
 
-const Routes = ({ login, signup, setCurrentUser }) => {
+const Routes = ({ login, signup }) => {
   console.debug(
     "Routes...",
     `login=${typeof login}`,

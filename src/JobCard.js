@@ -5,7 +5,6 @@ function JobCard({ id, title, salary, equity, appliedStatus }) {
   const [applied, setApplied] = useState(appliedStatus);
   const handleClick = async (event) => {
     if (!applied) {
-      // await applyForJob(id);
       const message = await JoblyApi.applyForJob(id);
       setApplied(Boolean(message));
     }
