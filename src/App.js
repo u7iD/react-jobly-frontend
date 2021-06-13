@@ -32,10 +32,8 @@ const App = () => {
     }
   };
 
-  const logout = async () => {
-    setInfoLoaded(false);
+  const logout = () => {
     setToken(null);
-    setCurrentUser(null);
   };
 
   const signup = async (data) => {
@@ -61,6 +59,8 @@ const App = () => {
           console.error("App useEffect error...", error);
         }
         setInfoLoaded(true);
+      } else {
+        setCurrentUser(null);
       }
     };
     setInfoLoaded(false);

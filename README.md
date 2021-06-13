@@ -1,12 +1,13 @@
 # Jobly application in React
 
-This is a mocking app for listing and applying for jobs written in React and Node. It's deployed [here](https://jobly.wuyiwang.me/).
+This mocking app for listing and applying for jobs is deployed [here](https://jobly.wuyiwang.me/). The front-end is written in React.
 
 User of the app is able to:
 
 - sign up for an account or log in with an existing account
-- view lists of companies and jobs offered by all companies
-- view the detail of a specific company and its jobs
+- view lists of all companies
+- view jobs offered by all companies
+- view the details of a specific company and its job openings
 - search lists of companies and jobs using keyword(s)
 - apply for a job
 - modify some user account information

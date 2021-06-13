@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
  *
  * Props:
  * - key: string value of a key in local storage
- * - defaultValue: string value default to the empty string
  *
  * State:
  * - value: string value for the key in the local storage
