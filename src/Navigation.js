@@ -29,8 +29,8 @@ const Navigation = ({ logout }) => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" exact to="/login">
-            <span onClick={logout}>
+          <NavLink className="nav-link" exact to="/login" onClick={logout}>
+            <span>
               Log out {currentUser.first_name || currentUser.username}
             </span>
           </NavLink>
